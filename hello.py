@@ -12,10 +12,10 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import Required
 from wtforms import BooleanField, SelectField, RadioField
 from wtforms import FloatField
-import pickle
+#import pickle
 import os
 import numpy as np
-from sklearn.externals import joblib
+#from sklearn.externals import joblib
 import pandas as pd
 from pandas import Series, DataFrame
 import urllib2, json
@@ -35,17 +35,13 @@ import theano
 import keras
 from keras.models import Sequential
 from keras.layers.core import Dense, Activation, Dropout
-from keras.layers.advanced_activations import PReLU, LeakyReLU
+
 from keras.utils import np_utils
 import numpy as np
 
 
-from keras.regularizers import l2, activity_l2
-from keras.optimizers import Adam, RMSprop, Adadelta, Adagrad
+from keras.optimizers import RMSprop
 
-
-from keras.models import Sequential
-from keras.optimizers import SGD, Adam, RMSprop
 
 from keras.models import model_from_json
 
