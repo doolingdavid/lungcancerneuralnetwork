@@ -7,4 +7,6 @@ Jinja2==2.7.3
 synapseclient==1.3
 tornado==2.4
 WTForms==2.0.2
+Keras==0.2.0
+Theano==0.7.0
 
