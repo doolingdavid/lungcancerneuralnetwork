@@ -1253,8 +1253,8 @@ def internal_server_error(e):
 
 
 if __name__ == '__main__':
-   #run_server()
-   app.run(debug=True)
+   run_server()
+   #app.run(debug=True)
 
 
 
