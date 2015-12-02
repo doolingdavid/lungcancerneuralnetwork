@@ -1,0 +1,40 @@
+
+
+
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Hello, World!</h1>
+</div>
+
+<!--
+
+<hr/>
+<h1>Hello, {% if firstname %}{{ firstname }}{% else %}Stranger{% endif %}!</h1>
+<h1>Your last name is {% if lastname %}{{ lastname }}{% else %}Anonymous{% endif %}!</h1>
+<h1>Your Year of Birth is {% if yob %}{{ yob }}{% else %}Before the Dawn of Time{% endif %}!</h1>
+<h1>Your female status is {{ femalestatus }}</h1>
+-->
+{{ wtf.quick_form(form) }}
+
+<hr />
+
+<h1> Your data is {% if datax  %}{{ datax }}{% else %}Still not complete{% endif %}!</h1>
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+

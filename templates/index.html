@@ -1,0 +1,147 @@
+
+
+
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Breast Cancer Survival Curve Prediction</h1>
+</div>
+
+<!--
+
+<hr/>
+<h1>Hello, {% if firstname %}{{ firstname }}{% else %}Stranger{% endif %}!</h1>
+<h1>Your last name is {% if lastname %}{{ lastname }}{% else %}Anonymous{% endif %}!</h1>
+<h1>Your Year of Birth is {% if yob %}{{ yob }}{% else %}Before the Dawn of Time{% endif %}!</h1>
+<h1>Your female status is {{ femalestatus }}</h1>
+-->
+{{ wtf.quick_form(form) }}
+
+<hr />
+
+
+
+<h1> Prediction:  </h1>
+<div>
+  <ol>
+<li> Probability of surviving at least 6 months <strong> {{ prob6 }} </strong> </li>
+<li> Probability of surviving at least 12 months <strong>  {{ prob12 }} </strong> </li>
+<li> Probability of surviving at least 60 months <strong> {{ prob60 }} </strong> </li>
+  </ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+  
+
+<!--
+ <p>
+ <img src =" {{ url_for('static', filename = 'figure.png') }}" alt = "prevoius" border="30">
+
+
+</p>
+
+-->
+
+
+
+
+<script src='static/Chart.min.js'></script>
+
+
+
+<h1>Predicted Survival Curve from Model</h1>
+<!-- bar chart canvas element -->
+<canvas id="chart" width="600" height="400"></canvas>
+ 
+<script>
+ 
+   // bar chart data
+   var barData = {
+   labels : [{% for item in labels %}
+                  "{{item}}",
+              {% endfor %}],
+   datasets : [
+      {
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            bezierCurve : false,
+            data : [{% for item in values %}
+                      {{item}},
+                    {% endfor %}]
+      }]
+   }
+ 
+    Chart.defaults.global.animationSteps = 50;
+    Chart.defaults.global.tooltipYPadding = 16;
+    Chart.defaults.global.tooltipCornerRadius = 0;
+    Chart.defaults.global.tooltipTitleFontStyle = "normal";
+    Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+    Chart.defaults.global.animationEasing = "easeOutBounce";
+    Chart.defaults.global.responsive = false;
+    Chart.defaults.global.scaleLineColor = "black";
+    Chart.defaults.global.scaleFontSize = 16;
+ 
+   // get bar chart canvas
+   var mychart = document.getElementById("chart").getContext("2d");
+ 
+   steps = 10
+   max = 1
+   // draw bar chart
+   var LineChartDemo = new Chart(mychart).Line(barData, {
+        scaleLabel : "<%= value %>",
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth:.1,
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+ 
+   });
+ 
+ 
+</script>
+ 
+
+     
+
+
+<div id='button'>
+  <form action="/">
+    <input type=submit value='Submit another Seer data tuple'>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
