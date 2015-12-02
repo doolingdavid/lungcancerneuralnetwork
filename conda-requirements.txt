@@ -13,7 +13,6 @@ datashape=0.4.5=np19py27_0
 decorator=3.4.2=py27_0
 flask=0.10.1=py27_1
 funcsigs=0.4=py27_0
-h5py=2.5.0=np110py27_4
 itsdangerous=0.24=py27_0
 launcher=1.0.0=1
 numpy=1.9.2=py27_0
