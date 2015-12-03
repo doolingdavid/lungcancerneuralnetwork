@@ -12,7 +12,7 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import Required
 from wtforms import BooleanField, SelectField, RadioField
 from wtforms import FloatField
-#import pickle
+import pickle, cPickle
 import os
 import numpy as np
 #from sklearn.externals import joblib
@@ -274,9 +274,16 @@ moment = Moment(app)
 
 #clf = joblib.load('LUNGCLASSIFIER/rflung.pkl')
 
-clf = model_from_json(open('LUNGNN/modellung_architecture.json').read())
 
-clf.load_weights('LUNGNN/modellung_weights.h5')
+pkl_file = open('LUNGPICKLENN/modellung.pkl', 'rb')
+
+clf = cPickle.load(pkl_file)
+
+pkl_file.close()
+
+#clf = model_from_json(open('LUNGNN/modellung_architecture.json').read())
+
+#clf.load_weights('LUNGNN/modellung_weights.h5')
 
 def get_survival_function(document):
     """takes the input of the text area field and
