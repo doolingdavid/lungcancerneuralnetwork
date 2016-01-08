@@ -15,7 +15,7 @@ from wtforms import FloatField
 import pickle, cPickle
 import os
 import numpy as np
-#from sklearn.externals import joblib
+from sklearn.externals import joblib
 import pandas as pd
 from pandas import Series, DataFrame
 import urllib2, json
@@ -31,19 +31,7 @@ import tornado.options
 import tornado.autoreload
 from flask import jsonify
 
-import theano
-import keras
-from keras.models import Sequential
-from keras.layers.core import Dense, Activation, Dropout
 
-from keras.utils import np_utils
-import numpy as np
-
-
-from keras.optimizers import RMSprop
-
-
-from keras.models import model_from_json
 
 
 
@@ -271,19 +259,13 @@ app.config['SECRET_KEY'] = 'hard to guess string'
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 
-
-#clf = joblib.load('LUNGCLASSIFIER/rflung.pkl')
-
-
 pkl_file = open('LUNGPICKLENN/modellung.pkl', 'rb')
 
 clf = cPickle.load(pkl_file)
 
 pkl_file.close()
 
-#clf = model_from_json(open('LUNGNN/modellung_architecture.json').read())
 
-#clf.load_weights('LUNGNN/modellung_weights.h5')
 
 def get_survival_function(document):
     """takes the input of the text area field and
@@ -294,13 +276,10 @@ def get_survival_function(document):
     A = []
     p_so_far = 1
     for i in range(120):
-        thing = np.append(X,i)
+        thing = np.append(X, i)
         p_cur = clf.predict_proba(thing[None,...],verbose=0)[0][1]
         A.append(p_so_far * p_cur)
         p_so_far = p_so_far*(1 - p_cur)
-       # p_cur = clf.predict_proba(np.append(X, i))[0][1]
-       # A.append(p_so_far * p_cur)
-       # p_so_far = p_so_far*(1 - p_cur)
     As = pd.Series(A)
     Asurv = 1 - As.cumsum()
     prob6 = Asurv.loc[6]
@@ -1258,6 +1237,5 @@ def internal_server_error(e):
 if __name__ == '__main__':
    run_server()
    #app.run(debug=True)
-
 
 
